@@ -38,6 +38,7 @@ Entonces para usarla es necesario instalarla. Para ello ejecutamos el comando:
 
 Y posteriormente importarla.
 */
+import axios from 'axios';
 
 function NewPage() {
 
@@ -50,8 +51,13 @@ function NewPage() {
   // Entonces esta constante que llamamos enviar va a tener la ejecución del handleSubmit
   // y esto nos va a dar los datos (data) y estos datos son justamente los datos que tipea
   // el usuario
-  const enviar = handleSubmit( data => {
+  const enviar = handleSubmit( async data => {
     console.log(data);
+    // Ahora con la ayuda de la biblioteca axios enviamos los datos al backend
+    // y le indicamos la ruta y luego la data (tarea) que queremos enviar.
+    // Y al ser una función asíncrona usamos el async y el await
+    const resp = await axios.post( 'api/tasks', data );
+    console.log(resp);
   });
 
   return (
