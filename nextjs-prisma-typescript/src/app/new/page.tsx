@@ -65,15 +65,21 @@ function NewPage() {
 
       <form onSubmit={enviar}>
 
-        <input type="text" placeholder="Escribe un titulo"
+        <label htmlFor="title" className='font-bold text-xs'>
+          Escribe un título
+        </label>
+        <input id='title' type="text" placeholder="Escribe un titulo"
                className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block mb-2"
                {...register('title')}/>
 
-        <textarea placeholder="Escribe la descripción de la tarea"
+        <label htmlFor="description" className='font-bold text-xs'>
+          Escribe un descripción
+        </label>
+        <textarea id='description' placeholder="Escribe la descripción de la tarea"
                   className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block w-full"
                   {...register('description')}/>
 
-        <button>
+        <button className='bg-sky-500 px-3 py-2 rounded-md text-white mt-2'>
           Crear
         </button>
 
