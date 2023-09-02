@@ -9,14 +9,27 @@
 
 import { NextResponse } from "next/server";
 
+// NOTA: Para hacer que estas rutas funciones nosotros vamos a tener que estar realizando consultas a la base de datos
+//       y esto es muy fácil con la ayuda de prisma, y para ello tendríamso que importarlo e instancialo, pero como esto
+//       ya lo teníamos en la configuarción previamente que realizamos en el archivo prisma.ts ubicado en el directorio 
+//       libs entonces simplemente la usamos
+import { prisma } from '@/libs/prisma';
+
 // NOTA: En estas rutas vamos a estar comunicándonos bastante con la base de datos.
 //       Por lo tanto acá creamos las rutas disponibles que van a permitir hacer las 
 //       operaciones CRUD
 
 //NOTA: Para visualizar esta ruta de backend podemos en la url del navegador
 //      indicar el /api/tasks (Ej: http://localhost:3000/api/tasks)
-export function GET() {
-    return NextResponse.json('Obteniendo tareas');
+export async function GET() {
+    // Ahora podemos usar prisma para hacer la consulta a la base de datos antes de retornar una respuesta.
+    // Entonces le vamos a decir con prisma el cual tiene una propiedad llamada task que hace referencia a 
+    // la tabla en base de datos que habíamos creado y esto a su vez tiene diversos métodos que podemos usar
+    // en este caso como vamos a obtener todo usamos el findMany().
+    // Adicionalmente como es una consulta a base de datos, es decir, a un sistema externo es asíncrono por lo
+    // tanto vamos a indicar el async y await para que espere la respuesta de los datos antes de continuar.
+    const tasks = await prisma.task.findMany();
+    return NextResponse.json(tasks);
 }
 
 export function POST(){
