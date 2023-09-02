@@ -47,6 +47,15 @@ export function PUT( request: Request, { params }: Params ){
 }
 
 // Función para eliminar una tarea
-export function DELETE( request: Request, { params }: Params ) {
-    return NextResponse.json("Eliminando tarea " + params.id);
+// Este es muy similar al método para obtener una tarea ya que de la misma forma tiene un método
+// propio para eliminar que recebe un obejto con where
+export async function DELETE( request: Request, { params }: Params ) {
+    const task = await prisma.task.delete({
+        where: {
+            id: Number(params.id)
+        }
+    });
+
+    // Regresamos la respuesta
+    return NextResponse.json( task );
 }
