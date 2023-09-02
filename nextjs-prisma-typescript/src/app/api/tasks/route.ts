@@ -32,6 +32,17 @@ export async function GET() {
     return NextResponse.json(tasks);
 }
 
-export function POST(){
-    return NextResponse.json('Creando tarea');
+export async function POST( request: Request ){
+    // De la misma forma como realizamos con el método GET para obtener tareas usamos prisma para 
+    // crear una tarea.
+    // Creamos una constante que va a hacer la conversión del request a jston y el cual contiene los datos 
+    const data = await request.json();
+    // Ahora lo que vamos a hacer es guardarlo con la función create, a la cual le decimos que tiene una propiedad
+    // data la cual contiene las propieades que vamos a guardar
+    const newTask = await prisma.task.create({
+        data
+    });
+
+    // Retornamos la respuesta al cliente
+    return NextResponse.json( newTask );
 }
