@@ -29,4 +29,23 @@ el QuickStart y vamos a proceder con lo siguiente:
       lo tanto cambiariamos en la ultima parte del comando (squlite) por la base de datos a usar
       y ralizar su respectiva configuración.
 
+    * El siguiente paso es en la ruta de prisma, en el archivo schema.prisma es definir el modelo 
+      o modelos de la base de datos.
+
+    * A continuación de haberlos definido procedemos a generar el modelo de la base de datos y para
+      ello es bastante sencillo, solamente ejecutar el comando:
+            
+            npx prisma migrate dev --name init
+      
+      Y basicamente lo que va a hacer el comando es decirle a prisma que genere toda la base de datos,
+      genera el código SQL y genera la base de datos basada en la tabla que hemos creado en el archivo
+      schema.prisma
+
+     * Ahora para poder ver los datos dentro de la base de datos necesitaríamos un software. Pero de hecho
+       para poder verlos Prisma también provee una herramienta para esto y lo usamos con el comando:
+
+            npx prisma studio
+      
+      Y esto nos va a presentar una interfaz web con la cual podemos interactuar con los datos.
+
 ------------------------------------------------------------------------------------------------
