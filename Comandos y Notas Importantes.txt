@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------------------
+						Nextjs Prisma CRUD con Typescript
+------------------------------------------------------------------------------------------------
+El siguiente enlace nos dirige a la web oficial de React https://nextjs.org/
+------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite crear una aplicación en Nextjs
+-----------------------------------------------------------------------------------------------------------
+
+	npx create-next-app nombre-app
+	
+  SETUP
+  * Lo primero que se nos va a solictar es si queremos usar JS o Typescript (En este caso Typescript)
+  * Lo siguiente si queremos usar ESLint (En este caso le damos Yes)
+  * Posteriormente si queremos usar Tilewind (En este caso le damos Yes)
+  * Si queremos usar la carpeta src (En este caso le damos Yes)
+  * Si queremos usar el App Router (En este caso le damos Yes)
+  * Y si queremos usar el import alias (En este caso le damos No)
+
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite arrancar una aplicación en Nextjs
+-----------------------------------------------------------------------------------------------------------
+
+	npm run dev
+	
