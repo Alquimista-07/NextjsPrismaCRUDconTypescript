@@ -24,17 +24,37 @@ porque se están manejando hooks entonces para ello especificamos el "use client
 import { useForm } from 'react-hook-form';
 
 function NewPage() {
+
+  // NOTA: Lo que hace el hook useForm es permitirnos manejar el evento del envío del formulario, es decir, puedo
+  //       importar desde allí una función llamada el handleSubmit.
+  //       Adicionalmente también tenemos una función llamada register para registrar el input que queramos recibir
+  //       y de esta forma capturar sus datos
+  const { handleSubmit, register } = useForm()
+
+  // Entonces esta constante que llamamos enviar va a tener la ejecución del handleSubmit
+  // y esto nos va a dar los datos (data) y estos datos son justamente los datos que tipea
+  // el usuario
+  const enviar = handleSubmit( data => {
+    console.log(data);
+  });
+
   return (
     <section className="h-screen flex items-center justify-center">
 
-      <form>
+      <form onSubmit={enviar}>
+
         <input type="text" placeholder="Escribe un titulo"
-               className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block mb-2"/>
+               className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block mb-2"
+               {...register('title')}/>
+
         <textarea placeholder="Escribe la descripción de la tarea"
-                  className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block w-full"/>
+                  className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block w-full"
+                  {...register('description')}/>
+
         <button>
           Crear
         </button>
+        
       </form>
 
     </section>
