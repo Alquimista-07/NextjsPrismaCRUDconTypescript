@@ -1,0 +1,32 @@
+------------------------------------------------------------------------------------------------
+						                PRISMA ORM
+------------------------------------------------------------------------------------------------
+Prisma es un ORM (Object Relational Mapping), es decir, es una biblioteca que nos permite
+comunicarnos con la base de datos sin la necesidad de utilizar SQL, es decir, vamos a poder
+utilizar código de JavaScript o TypeScript para poder comunicarnos. Por lo tanto Prisma nos va
+a permitir utilizar una conexión con varias bases de datos como podría ser SQLite, PostgreSQL,
+MySQL, SQL Server o incluso MongoDB.
+
+El siguiente enlace nos dirige a la web oficial de Prisma https://www.prisma.io/
+
+Y el siguiente nos dirige al QuickStart para los primeros pasos y configuración: 
+https://www.prisma.io/docs/getting-started/quickstart
+
+En este caso como ya tenemos el proyecto creado en Nextjs vamos a saltar algunos pasos que nos indica
+el QuickStart y vamos a proceder con lo siguiente:
+
+    * Primero lo que hacemos es realizar la instalación: Para ello ejecutamos el comando:
+      
+            npm install prisma -D
+    
+    * Luego lo que vamos a hacer es configur con que base de datos se va a trabajar, que para
+      este caso en este proyecto usaremos SQLite pero luego se cambiara a una DB en PostgreSQL.
+      Entonces para hacer esto ejecutamos el comando:
+      
+            npx prisma init --datasource-provider sqlite
+
+      Pero como se había mencionado podemos usar cualquier base de datos que este soportada por
+      lo tanto cambiariamos en la ultima parte del comando (squlite) por la base de datos a usar
+      y ralizar su respectiva configuración.
+
+------------------------------------------------------------------------------------------------
