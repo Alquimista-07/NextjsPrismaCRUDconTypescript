@@ -42,8 +42,22 @@ export async function GET( request: Request, { params }: Params ){
 }
 
 // Función para actualizar una tarea
-export function PUT( request: Request, { params }: Params ){
-    return NextResponse.json("Actualizando tarea " + params.id);
+export async function PUT( request: Request, { params }: Params ){
+
+    // Convertimos el request al formato json
+    const data = await request.json();
+
+    // Acá tenemos que consultar y a su ves pasarle los datos para actualizar que en este 
+    // caso los almacenamos dentro de data
+    const taskUpdated = await prisma.task.update({
+        where: {
+            id: Number(params.id)
+        },
+        data: data
+    })
+
+    // Retornamos la respuesta
+    return NextResponse.json( taskUpdated );
 }
 
 // Función para eliminar una tarea
