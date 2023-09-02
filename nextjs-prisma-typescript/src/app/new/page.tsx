@@ -23,6 +23,22 @@ porque se están manejando hooks entonces para ello especificamos el "use client
 "use client"
 import { useForm } from 'react-hook-form';
 
+/*
+-----------------------------------------------------------------------------------
+NOTA IMPORTANTE: Librearía Axios para manejo de peticiones HTTP con fetch
+-----------------------------------------------------------------------------------
+
+Ya con la configuración del formulario usando la librería react hook form podemos enviar los datos hacia el 
+backend a través de peticiones fetch, pero también para esto tenemos una biblioteca llamada Axios que nos 
+facilita mucho esta tarea y nos evita escribir muchas líneas de código.
+
+Entonces para usarla es necesario instalarla. Para ello ejecutamos el comando:
+
+    npm install axios
+
+Y posteriormente importarla.
+*/
+
 function NewPage() {
 
   // NOTA: Lo que hace el hook useForm es permitirnos manejar el evento del envío del formulario, es decir, puedo
@@ -54,7 +70,7 @@ function NewPage() {
         <button>
           Crear
         </button>
-        
+
       </form>
 
     </section>
