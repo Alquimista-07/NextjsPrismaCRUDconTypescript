@@ -9,3 +9,13 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+// NOTA: En este caso no vamos a entrar tanto en detalle sobre prisma.
+//       Simplemente lo que vamos a hacer es definir la tabla en donde
+//       se van a estar guardando los datos.
+model Task {
+  id Int @id @default(autoincrement())
+  title String
+  description String?
+  createdAt DateTime @default(now())
+}
