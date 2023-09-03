@@ -20,7 +20,9 @@ el QuickStart y vamos a proceder con lo siguiente:
             npm install prisma -D
     
     * Luego lo que vamos a hacer es configur con que base de datos se va a trabajar, que para
-      este caso en este proyecto usaremos SQLite pero luego se cambiara a una DB en PostgreSQL.
+      este caso en este proyecto usaremos SQLite pero luego se cambiara a una DB en PostgreSQL
+      (Para más información sobre el cambio a PostgreSQL en el despliegue revisar el archivo
+      NOTAS Despliegue Vercel).
       Entonces para hacer esto ejecutamos el comando:
       
             npx prisma init --datasource-provider sqlite
@@ -36,10 +38,36 @@ el QuickStart y vamos a proceder con lo siguiente:
       ello es bastante sencillo, solamente ejecutar el comando:
             
             npx prisma migrate dev --name init
-      
+
       Y basicamente lo que va a hacer el comando es decirle a prisma que genere toda la base de datos,
       genera el código SQL y genera la base de datos basada en la tabla que hemos creado en el archivo
       schema.prisma
+
+      NOTA IMPORTANTE: Por ejemplo que pasa si luego de haber generado ya el proceso queremos volver a 
+		                   cargar el modelo debido a que realizamos alguna modificación en el modelo de una 
+                       tabla en el schema.prisma, bueno para esto existe un comando que nos permite hacer 
+                       eso el cual es: 
+
+								              npx prisma generate
+                       
+                       Y esto lo que va a hacer es volver a generar el prisma client, lo va a actualizar
+						           para que nuevamente coincida con lo que tenemos en la configuración de prisma 
+						           (archivo schema.prisma)
+
+                       De hecho esto lo podemos automatizar agregando el script en el archivo package.json 
+                       del proyecto y el cual es el siguiente:
+
+                          "postinstall": "prisma generate"
+                       
+                       Y los scripts en el package.json nos quedaría mas o menos como lo siguiente:
+
+                            "scripts": {
+                              "dev": "next dev",
+                              "build": "next build",
+                              "start": "next start",
+                              "lint": "next lint",
+                              "postinstall": "prisma generate"
+                            },
 
      * Ahora para poder ver los datos dentro de la base de datos necesitaríamos un software. Pero de hecho
        para poder verlos Prisma también provee una herramienta para esto y lo usamos con el comando:
