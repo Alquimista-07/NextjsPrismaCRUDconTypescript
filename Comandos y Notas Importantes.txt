@@ -25,3 +25,8 @@ El siguiente enlace nos dirige a la web oficial de React https://nextjs.org/
 
 	npm run dev
 	
+-----------------------------------------------------------------------------------------------------------
+* El siguiente comando me permite hacer el build de producción en Nextjs
+-----------------------------------------------------------------------------------------------------------
+
+	npm run build
