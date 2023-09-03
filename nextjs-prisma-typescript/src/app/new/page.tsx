@@ -117,7 +117,7 @@ function NewPage( {params}: {params: { id: string }} ) {
   });
 
   return (
-    <section className="h-screen flex items-center justify-center">
+    <section className="h-[calc(100vh-7rem)] flex items-center justify-center">
 
       <form onSubmit={enviar}>
 
