@@ -23,9 +23,24 @@ interface Props {
     task: Task;
 }
 
+// Ahora como queremos que al hacer click sobre un tarjeta nos redireccione a un componente para editar entonces 
+// para esto tenemos varias opciones una es englobar todo dentro de un componente links añadir un hook y manejar 
+// el evento onClick en este caso vamos a manejarlo con el hook useRouter explicado anteriormente cuando hacemos 
+// la redirección luego de crear una tarea.
+"use client";
+import { useRouter } from 'next/navigation';
+
 function TaskCard({ task }: Props) {
+
+  const router = useRouter(); 
+
   return (
-    <div className="bg-gray-900 p-3 hover:bg-gray-800 hover: cursor-pointer">
+    <div className="bg-gray-900 p-3 hover:bg-gray-800 hover: cursor-pointer"
+    // Manejamos el evento click sobre el card para redireccionar usando el hook
+         onClick={() => {
+            router.push(`/task/edit/${task.id}`)}
+            }>
+
       <h3 className="font-bold text-xl">{task.title}</h3>
       <p className="text-slate-300">{task.description}</p>
     </div>
