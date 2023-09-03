@@ -152,7 +152,18 @@ function NewPage( {params}: {params: { id: string }} ) {
           {/* Una segunda cosa importante es para que este botón no ejecute el evento submit del formulario le vamos a colocar el tipo botón
               y de esta forma le vamos a decir que este botón hace un click pero no voy a ejecutar el evento del formulario*/}
           <button className='bg-red-500 px-3 py-2 rounded-md text-white mt-2'
-                  type='button' >
+                  type='button' 
+                  onClick={ async () => {
+                    // Podemos colocar una ventana de confirmación usando el confirm
+                    if(confirm('¿Está seguro de que desea eliminar la tarea?')){
+                      // Y ya con axios podemos llamar la petición que habíamos creado para eliminar
+                      await axios.delete(`/api/tasks/${params.id}`);
+                      // Y redireccionamos una vez eliminado
+                      router.push('/');
+                      // Obligamos el refresco para evitar el bug de que el card queda en la vista
+                      router.refresh();
+                    }
+                  }}>
             Eliminar
           </button>
 
