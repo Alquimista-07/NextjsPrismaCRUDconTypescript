@@ -57,7 +57,7 @@ async function HomePage() {
 
   // Y de esta forma ya tenemos los datos por lo tanto podemos recorrerlos para cargarlos en la vista
   return (
-    <div className="grid grid-cols-3 gap-3 mt-5">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
       { tasks.map(task => (
       <TaskCard task={task}  key={task.id} />
     )) }
