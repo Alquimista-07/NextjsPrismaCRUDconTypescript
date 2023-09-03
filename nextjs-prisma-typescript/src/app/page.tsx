@@ -50,6 +50,19 @@ async function loadTasks(){
 
 }
 
+// NOTA: Agregamos la propiedad revalidate ya que NextJS tiene una caracterísitica y es que 
+//       guarda los datos en cache por lo tanto es necesario refrescar cuando se cargan datos
+//       nuevos y esto no se ve tanto en desarrollo pero ya en el despliegue nos damos cuenta 
+//       debido a que si creamos una tarea no vamos a ver reflejados los cambios hasta hacer 
+//       el refresh de la página por lo tanto para ello usamos este revalidate al cual pide
+//       un tiempo en segundos, por ejemplo 60.
+
+//export const revalidate = 60;
+
+// Otra forma de hacer lo mismo es usando el force dynamic el cual lo usamos de la siguiente
+// forma, el cual siempre va a obviar la memoria cache y volver a refrescar la ágina:
+export const dynamic = 'force-dynamic';
+
 async function HomePage() {
   // Y a HomePage simplemente le decimos que ejecute la función loadTasks
   const tasks = await loadTasks()
