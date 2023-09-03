@@ -44,13 +44,23 @@ import axios from 'axios';
 // en la BD y para ello usamos el Router
 import { useRouter } from 'next/navigation';
 
-function NewPage() {
+// Importación useEffect
+import { useEffect } from 'react';
+
+// NOTA: Ahora como estamos usando el mismo componente formulario para crear y editar lo que tenemos que hacer
+//       es validar si existe un parámentro en la url y de esta forma detectar si estamos creando o editando
+//       y por lo tanto ya con el parámetro podemos consultarlo cuando cargue la página, entonces recordando 
+//       del curso de react del mismo autor (Canal YouTube - Fazt)podemos usar el hook useEffect para ratificar 
+//       que se ejecute cuando haya cargado la página.
+function NewPage( {params}: {params: { id: string }} ) {
 
   // NOTA: Lo que hace el hook useForm es permitirnos manejar el evento del envío del formulario, es decir, puedo
   //       importar desde allí una función llamada el handleSubmit.
   //       Adicionalmente también tenemos una función llamada register para registrar el input que queramos recibir
-  //       y de esta forma capturar sus datos
-  const { handleSubmit, register } = useForm()
+  //       y de esta forma capturar sus datos.
+  //       Tenemos otra función de react hook form que nos permite pasar datos al formulario ya que esto lo requerimos
+  //       debido a que estamos usando el mismo formulario para actualizar los datos
+  const { handleSubmit, register, setValue } = useForm()
 
   // Entonces acá podemos usar el hook useRouter que me da un objeto router que puedo usar para cambiar de página
   // Pero hay que recordar que como acá no tengo una etiqueta link y quero ejecutarlo de manera programada, es decir,
@@ -58,16 +68,44 @@ function NewPage() {
   // creado
   const router = useRouter()
 
+  // Usamos el useEffect
+  useEffect(() => {
+    // Cuando el params tenga datos
+    if( params.id ){
+      // Podemos usar fetch o axios para traer los datos. En este caso usamos axios pero 
+      // como estoy dentro de un useEffect y el useEffect no permite usar el await a menos 
+      // que cree una función entonces usamos un then()
+      axios.get(`/api/tasks/${params.id}`)
+           .then( resp => {
+            // Cargamos los datos y al usar react hook form tenemos otra función que es el setValue
+            // para pasar los datos al formulario y le pasamos como primer parámetro el nombre que 
+            // le dimos al registrar el campo en el formulario y como segundo parámetro la data que 
+            // le queremos asignar
+            setValue('title', resp.data.title);
+            setValue('description', resp.data.description);
+           } )
+    }
+  }, []);
+  
+
   // Entonces esta constante que llamamos enviar va a tener la ejecución del handleSubmit
   // y esto nos va a dar los datos (data) y estos datos son justamente los datos que tipea
   // el usuario
   const enviar = handleSubmit( async data => {
-    console.log(data);
-    // Ahora con la ayuda de la biblioteca axios enviamos los datos al backend
-    // y le indicamos la ruta y luego la data (tarea) que queremos enviar.
-    // Y al ser una función asíncrona usamos el async y el await
-    const resp = await axios.post( 'api/tasks', data );
-    console.log(resp);
+    // NOTA: Como estamos usando el mismo componente para crear y editar entonces vamos a condicionar
+    //       para validar si la url trae algún parámetro con el fin de ejecutar una cración o actualización
+    //       según corresponda
+    if(params.id){
+      // ACTUALIZA TAREA
+      // Usando axios actualizamos y como primer parámetro pasamos la url y como segundo la data
+      await axios.put( `/api/tasks/${params.id}`, data );
+    } else {
+      // CREA TAREA
+      // Ahora con la ayuda de la biblioteca axios enviamos los datos al backend
+      // y le indicamos la ruta y luego la data (tarea) que queremos enviar.
+      // Y al ser una función asíncrona usamos el async y el await
+      const resp = await axios.post( 'api/tasks', data );
+    }
 
     // Como mencionamos anteriormente hacemos la redirección luego del posteo de los datos
     // entonces redireccionamos al home o ruta inicial
@@ -75,6 +113,7 @@ function NewPage() {
     // Hacemos un refres para revalidar los datos cuando cambie de página
     // Y de esta forma corregir un pequeño bug
     router.refresh();
+
   });
 
   return (
@@ -97,7 +136,12 @@ function NewPage() {
                   {...register('description')}/>
 
         <button className='bg-sky-500 px-3 py-2 rounded-md text-white mt-2'>
-          Crear
+          {
+            /* Hacemos una validación para validar si la url trae parámentro con el fin de cambiar 
+            el texto de botón debido a que estamos usando el mismo componente par crear y editar */
+            params.id? "Actualizar" : "Crear"
+          }
+          
         </button>
 
       </form>
