@@ -5,7 +5,10 @@ import Link from "next/link"
 function Nabvar() {
   return (
     <nav className="flex justify-between items-center py-4">
-        <h3 className="font-bold text-xl">NextJSCRUD</h3>
+        
+        <Link href="/">
+          <h3 className="font-bold text-xl">NextJSCRUD</h3>
+        </Link>
 
         <ul>
             <li>
