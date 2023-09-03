@@ -6,6 +6,10 @@ import axios from "axios"
 // enfoque o forma de traer los datos que se explica más abajo.
 import { prisma } from '@/libs/prisma';
 
+// Importación de TaskCard el cual lo convertimos en un componente individual
+// para pasarlo al Homepage
+import TaskCard from '@/components/TaskCard';
+
 // Función para traer los datos desde la BD
 async function loadTasks(){
   // Acá tenemos varias formas de poder pedir los datos, como esto es código de backend
@@ -55,10 +59,7 @@ async function HomePage() {
   return (
     <div className="grid grid-cols-3 gap-3 mt-5">
       { tasks.map(task => (
-      <div key={ task.id } className="bg-gray-900 p-3">
-        <h3 className="font-bold text-xl">{ task.title }</h3>
-        <p className="text-slate-300">{ task.description }</p>
-      </div>
+      <TaskCard task={task}  key={task.id} />
     )) }
     </div>
   )
