@@ -72,6 +72,9 @@ function NewPage() {
     // Como mencionamos anteriormente hacemos la redirección luego del posteo de los datos
     // entonces redireccionamos al home o ruta inicial
     router.push('/');
+    // Hacemos un refres para revalidar los datos cuando cambie de página
+    // Y de esta forma corregir un pequeño bug
+    router.refresh();
   });
 
   return (
