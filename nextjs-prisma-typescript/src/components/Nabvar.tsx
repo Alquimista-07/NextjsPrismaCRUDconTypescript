@@ -4,12 +4,12 @@ import Link from "next/link"
 
 function Nabvar() {
   return (
-    <nav>
-        <h3>NextJSCRUD</h3>
+    <nav className="flex justify-between items-center py-4">
+        <h3 className="font-bold text-xl">NextJSCRUD</h3>
 
         <ul>
             <li>
-                <Link href="/new">
+                <Link href="/new" className="text-slate-200 hover:text-slate-400">
                     Nueva
                 </Link>
             </li>
