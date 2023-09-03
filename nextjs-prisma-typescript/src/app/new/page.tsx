@@ -40,6 +40,10 @@ Y posteriormente importarla.
 */
 import axios from 'axios';
 
+// Ahora lo que quremos es que redireccione luego de que responda el backend y se alamacenen los datos
+// en la BD y para ello usamos el Router
+import { useRouter } from 'next/navigation';
+
 function NewPage() {
 
   // NOTA: Lo que hace el hook useForm es permitirnos manejar el evento del envío del formulario, es decir, puedo
@@ -47,6 +51,12 @@ function NewPage() {
   //       Adicionalmente también tenemos una función llamada register para registrar el input que queramos recibir
   //       y de esta forma capturar sus datos
   const { handleSubmit, register } = useForm()
+
+  // Entonces acá podemos usar el hook useRouter que me da un objeto router que puedo usar para cambiar de página
+  // Pero hay que recordar que como acá no tengo una etiqueta link y quero ejecutarlo de manera programada, es decir,
+  // que cuando termine de responderme el backen quiero una redirección entonces tenemos que usar este router que hemos 
+  // creado
+  const router = useRouter()
 
   // Entonces esta constante que llamamos enviar va a tener la ejecución del handleSubmit
   // y esto nos va a dar los datos (data) y estos datos son justamente los datos que tipea
@@ -58,6 +68,10 @@ function NewPage() {
     // Y al ser una función asíncrona usamos el async y el await
     const resp = await axios.post( 'api/tasks', data );
     console.log(resp);
+
+    // Como mencionamos anteriormente hacemos la redirección luego del posteo de los datos
+    // entonces redireccionamos al home o ruta inicial
+    router.push('/');
   });
 
   return (
