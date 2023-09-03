@@ -25,7 +25,7 @@ interface Props {
 
 function TaskCard({ task }: Props) {
   return (
-    <div className="bg-gray-900 p-3">
+    <div className="bg-gray-900 p-3 hover:bg-gray-800 hover: cursor-pointer">
       <h3 className="font-bold text-xl">{task.title}</h3>
       <p className="text-slate-300">{task.description}</p>
     </div>
