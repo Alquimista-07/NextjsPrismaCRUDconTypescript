@@ -135,14 +135,28 @@ function NewPage( {params}: {params: { id: string }} ) {
                   className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block w-full"
                   {...register('description')}/>
 
-        <button className='bg-sky-500 px-3 py-2 rounded-md text-white mt-2'>
-          {
-            /* Hacemos una validación para validar si la url trae parámentro con el fin de cambiar 
-            el texto de botón debido a que estamos usando el mismo componente par crear y editar */
-            params.id? "Actualizar" : "Crear"
-          }
-          
-        </button>
+        <div className='flex justify-between'>
+
+          {/* Algo importante es que como vamos a agregar un segundo botón dentro del formulario es necesario indicarle el tipo 
+              submit para indicar que este botón es el que ejecuta el evento del formulario */}
+          <button className='bg-sky-500 px-3 py-2 rounded-md text-white mt-2'
+                  type='submit'>
+            {
+              /* Hacemos una validación para validar si la url trae parámentro con el fin de cambiar 
+              el texto de botón debido a que estamos usando el mismo componente par crear y editar */
+              params.id? "Actualizar" : "Crear"
+            }
+            
+          </button>
+
+          {/* Una segunda cosa importante es para que este botón no ejecute el evento submit del formulario le vamos a colocar el tipo botón
+              y de esta forma le vamos a decir que este botón hace un click pero no voy a ejecutar el evento del formulario*/}
+          <button className='bg-red-500 px-3 py-2 rounded-md text-white mt-2'
+                  type='button' >
+            Eliminar
+          </button>
+
+        </div>
 
       </form>
 
